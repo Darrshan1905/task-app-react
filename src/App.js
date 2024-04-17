@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import Welcome from './Welcome/welcome';
+import AllProjects from './Projects/pages/allProjects';
+import ShowProject from './Projects/pages/showProject';
+
+let routes;
+
+routes = (
+  <Routes>
+    <Route path='/' exact element={<Welcome/>}/>
+    <Route path='/projects' exact element={<AllProjects/>}/>
+    <Route path='/projects/:pid' exact element={<ShowProject/>}/>
+    <Route path = '*' element={<Navigate to ="/" replace/>}/>
+  </Routes>
+)
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <main>
+        {routes}
+      </main>
+    </Router>
   );
 }
 
