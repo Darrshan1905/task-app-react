@@ -21,13 +21,13 @@ body {
 h1,h2,h3 {
     font-weight: bolder;
     margin-bottom: 25px;
-  }
+}
 
-  h1,h2 {
+h1,h2 {
     text-align: center;
-  }
+}
 
-a {
+a, .logout-btn{
     text-decoration: none;
     color: #4db5ff;
     padding: 0.75rem 1.2rem;
@@ -38,7 +38,11 @@ a {
     background: transparent;
 }
 
-a:hover {
+.logout-btn {
+    font-size: medium;
+}
+
+a:hover, .logout-btn:hover {
     background: #fff;
     color: #1f1f38;
     border-color: transparent;
@@ -47,12 +51,12 @@ a:hover {
 
 a.icon {
     border: none;
-  }
+}
 
-  a.icon:hover {
+a.icon:hover{
     background: none ;
     color: #fff;
-  }
+}
 
 .nav-bar {
     margin: 10px 0 0 10px;
@@ -60,6 +64,15 @@ a.icon {
     justify-content: space-between;
     align-items: center;
 }
+
+.nav-btn {
+    border: none;
+  }
+
+  .nav-btn:hover {
+    background: none;
+    color: white;
+  }
 
 .home-div {
     margin-top: 7px;
@@ -117,7 +130,7 @@ a.icon {
     cursor: pointer;
 }
 
-input, .description {
+input, .description, .submit-btn {
     border-radius: 0.5rem;
     background: transparent;
     border: 1px solid #4db5ff;
@@ -136,6 +149,45 @@ input:focus, .description:focus {
     /* display: inline-block; */
     border-color: #fff;
     box-shadow: 0 0 0 0.1rem #fff;
+  }
+
+  .submit-btn {
+    padding: 0.75rem 1.2rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    border: 1px solid #4db5ff;
+    transition: all 400ms ease;
+    background: transparent;
+    color: #4db5ff;
+}
+  
+.submit-btn:hover {
+  background: #fff;
+  color: #1f1f38;
+  border-color: transparent;
+}
+
+.or {
+    font-size: large;
+    font-weight: bolder;
+    color: #fff;
+    display: inline;
+  }
+  
+  .sign-up-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .auth-link {
+    border: none;
+  }
+
+  .auth-link:hover {
+    background: none;
+    color: #fff;
   }
 
 .input-control {
@@ -169,6 +221,18 @@ input:focus, .description:focus {
   th {
     text-align: left;
     /* background-color: #f2f2f2; */
+  }
+
+  .tasks-container {
+    color: #ffffff;
+    max-width: 800px;
+    max-height: 800px;
+    margin: 70px auto;
+    padding: 20px;
+    border: 2px solid #4db5ff;
+    border-radius: 8px;
+    background: transparent;
+    overflow-y: auto;
   }
 
 

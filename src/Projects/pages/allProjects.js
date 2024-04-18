@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../shared/context/authContext";
 import SearchProject from "../components/searchProject";
 import ProjectsList from "../components/projectsList";
+
 
 const AllProjects = () => {
     const [projects, setProjects] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [isSearched, setIsSearched] = useState(false);
 
+    const auth = useContext(AuthContext);
+
     const fetchProjects = async () => {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJEYXJyc2hhbiBUIEciLCJlbWFpbCI6ImRhcnJzaGFuMTkwNUBnbWFpbC5jb20iLCJpZCI6Miwicm9sZSI6Im5vcm1hbCB1c2VyIn0sImlhdCI6MTcxMzM2MzY1OCwiZXhwIjoxNzEzMzY3MjU4fQ.9630zy20xUYScC1ysvFRubncnEowFxwiz2z_dBTh8wM"
+        const token = process.env.REACT_APP_TOKEN;
+        
         try {
             const response = await fetch("http://localhost:5001/api/projects", {
                 headers: {
@@ -32,7 +38,6 @@ const AllProjects = () => {
     }, []);
 
     const handleSearch = (results) => {
-        console.log("123")
         setSearchResults(results);
     }   
 
@@ -40,18 +45,43 @@ const AllProjects = () => {
         <React.Fragment>
             <nav className="nav-bar">
                 <h1 className="project-heading">Task Management System</h1>
+                <div>
+                    {auth.isLoggedIn && (
+                        <Link to = '/projects/new' className="nav-btn">
+                            Create a new Project
+                        </Link>
+                    )}
+                    {auth.isLoggedIn && (
+                        <Link to = '/profile' className="nav-btn">
+                            Profile
+                        </Link>
+                    )}
+                    {auth.isLoggedIn && (
+                        <button onClick={auth.logout} className='nav-btn logout-btn' >
+                            Logout
+                        </button>  
+                    )}             
+                </div>
             </nav>
             <div className="welcome-msg">
                 <h2 className="welcome-heading">Welcome <span className="welcome-name">guest</span> !</h2>
             </div>
             <SearchProject onSearch={handleSearch} setSearchedToTrue={setIsSearched}/>
             {!isSearched ? (
-                <ProjectsList projects={projects}/>
+                projects.length > 0 ? (
+                    <ProjectsList projects={projects}/>
+                ) : (
+                    <div className='tasks-container no-task'>
+                        <h2>No projects yet!</h2>
+                    </div>
+                )
             ) : (
                 searchResults.length > 0 ? (
                     <ProjectsList projects={searchResults} />
                 ) : (
-                    <p>No results match the search query.</p>
+                    <div className='tasks-container no-task'>
+                        <h2>No projects match the search query!</h2>
+                    </div>
                 )
             )}
         </React.Fragment>

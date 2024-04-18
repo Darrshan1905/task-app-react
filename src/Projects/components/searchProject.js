@@ -7,7 +7,7 @@ const SearchProject = ({onSearch, setSearchedToTrue}) => {
         e.preventDefault();
         console.log(searchQuery);
 
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJEYXJyc2hhbiBUIEciLCJlbWFpbCI6ImRhcnJzaGFuMTkwNUBnbWFpbC5jb20iLCJpZCI6Miwicm9sZSI6Im5vcm1hbCB1c2VyIn0sImlhdCI6MTcxMzM2MzY1OCwiZXhwIjoxNzEzMzY3MjU4fQ.9630zy20xUYScC1ysvFRubncnEowFxwiz2z_dBTh8wM"
+        const token = process.env.REACT_APP_TOKEN;
 
         let searchResults;
         await fetch(`http://localhost:5001/api/projects/search?key=${searchQuery}`, {
