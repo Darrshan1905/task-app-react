@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import { AuthContext } from "../../shared/context/authContext";
 
 const SearchProject = ({onSearch, setSearchedToTrue}) => {
     const [searchQuery, setSearchQuery] = useState("");
+
+    const auth = useContext(AuthContext);
 
     const submitHandler = async (e) => {
         e.preventDefault();
         console.log(searchQuery);
 
-        const token = process.env.REACT_APP_TOKEN;
+        const token = auth.token;
 
         let searchResults;
         await fetch(`http://localhost:5001/api/projects/search?key=${searchQuery}`, {

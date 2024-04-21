@@ -44,8 +44,8 @@ const LogIn = () => {
     
                 if(!response.ok) {
                     const data = await response.json();
-                    console.log(data.message);
-                    toast.error(data.message, toastOptions);
+                    console.log(data.error);
+                    toast.error(data.error, toastOptions);
                 }
     
                 const data = await response.json();

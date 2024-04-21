@@ -19,7 +19,6 @@ const SignUp = () => {
     }
 
     const handleValidation = () => {
-        console.log("123")
         if(email === "") {
             toast.error("Email can't be blank", toastOptions);
             return false;
@@ -28,12 +27,24 @@ const SignUp = () => {
             toast.error("Password can't be blank", toastOptions);
             return false;
         }
+        else if(password.length < 6) {
+            toast.error("Password length must be greater than 5 characters", toastOptions);
+            return false;
+        }
         if(name === "") {
             toast.error("Name can't be blank", toastOptions);
             return false;
         }
+        if(name.length < 3) {
+            toast.error("Name length must be greater than 2 characters", toastOptions);
+            return false;
+        }
         if(confirmPassword === "") {
             toast.error("Confirm Password can't be blank", toastOptions);
+            return false;
+        }
+        if(confirmPassword !== password) {
+            toast.error("Password and Confrim password don't match", toastOptions);
             return false;
         }
         return true;
@@ -49,13 +60,13 @@ const SignUp = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({email, password, name, confirmPassword})
+                    body: JSON.stringify({email, password, name})
                 })
     
                 if(!response.ok) {
                     const data = await response.json();
-                    console.log(data.message);
-                    toast.error(data.message, toastOptions);
+                    console.log(data.error);
+                    toast.error(data.error, toastOptions);
                 }
                 else {
                     navigate('/login');
@@ -67,61 +78,66 @@ const SignUp = () => {
     }
 
     return (
-        <div className="container">
-            <h2>Sign Up</h2>
-            <form onSubmit={signupHandler}>
-                <label htmlFor="email">Email</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        value={email} 
-                        onChange={e => setEmail(e.target.value)} 
+        <React.Fragment>
+            <nav className="nav-bar">
+                <h1 className="project-heading">Task Management System</h1>
+            </nav>
+            <div className="container">
+                <h2>Sign Up</h2>
+                <form onSubmit={signupHandler}>
+                    <label htmlFor="email">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            value={email} 
+                            onChange={e => setEmail(e.target.value)} 
+                            
+                        />
+                    <br/><br/>
+
+                    <label htmlFor="name">Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            value={name} 
+                            onChange={e => setName(e.target.value)} 
+                            
+                        />
+                    <br/><br/>
+
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password" 
+                        id="password" 
+                        value={password} 
+                        onChange={e => setPassword(e.target.value)} 
                         
                     />
-                <br/><br/>
+                    <br/><br/>
 
-                <label htmlFor="name">Name</label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        value={name} 
-                        onChange={e => setName(e.target.value)} 
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input
+                        type="password" 
+                        id="confirmPassword" 
+                        value={confirmPassword} 
+                        onChange={e => setConfirmPassword(e.target.value)} 
                         
                     />
-                <br/><br/>
+                    <br/><br/>
 
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password" 
-                    id="password" 
-                    value={password} 
-                    onChange={e => setPassword(e.target.value)} 
-                    
-                />
-                <br/><br/>
+                    <button type="submit" className="submit-btn">Sign up</button>
+                    <br/><br/>
 
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                    type="password" 
-                    id="confirmPassword" 
-                    value={confirmPassword} 
-                    onChange={e => setConfirmPassword(e.target.value)} 
-                    
-                />
-                <br/><br/>
+                    <div className='sign-up-option'>
+                        <p className='or'> Already have an account? </p>
+                        <Link to="/login" className='auth-link' >Login</Link><br />
+                    </div>
+                </form>
+                <ToastContainer>
 
-                <button type="submit" className="submit-btn">Sign up</button>
-                <br/><br/>
-
-                <div className='sign-up-option'>
-                    <p className='or'> Already have an account? </p>
-                    <Link to="/login" className='auth-link' >Login</Link><br />
-                 </div>
-            </form>
-            <ToastContainer>
-
-            </ToastContainer>
-        </div>
+                </ToastContainer>
+            </div>
+        </React.Fragment>
     )
 }
 

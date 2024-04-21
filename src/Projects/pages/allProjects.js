@@ -13,7 +13,7 @@ const AllProjects = () => {
     const auth = useContext(AuthContext);
 
     const fetchProjects = async () => {
-        const token = process.env.REACT_APP_TOKEN;
+        const token = auth.token;
         
         try {
             const response = await fetch("http://localhost:5001/api/projects", {
@@ -27,8 +27,8 @@ const AllProjects = () => {
             const data = await response.json();
             console.log(data)
             setProjects(data);
-        } catch (error) {
-            console.error("Error fetching projects:", error);
+        } catch (err) {
+            console.error("Error fetching projects:", err);
         }
         
     };

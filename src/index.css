@@ -27,6 +27,15 @@ h1,h2 {
     text-align: center;
 }
 
+hr {
+  width: 100%;
+  height: 0.1rem;
+  border: none;
+  margin: 20px 0;
+  background: linear-gradient(to right, #4db5ff 0%, #044e64 50%, #4db5ff 75%);
+  backdrop-filter: blur(25px);
+}
+
 a, .logout-btn{
     text-decoration: none;
     color: #4db5ff;

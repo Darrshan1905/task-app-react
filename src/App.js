@@ -33,7 +33,7 @@ function App() {
         <Route path='/' exact element={<Welcome/>}/>
         <Route path='/login' exact element={<LogIn/>}/>
         <Route path='/signup' exact element={<SignUp/>}/>
-        <Route path = '*' element={<Navigate to ="/" replace/>}/>
+        <Route path = '*' element={<Navigate to ="/login" replace/>}/>
       </Routes>
     )
   }
