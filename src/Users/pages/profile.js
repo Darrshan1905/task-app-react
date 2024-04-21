@@ -110,6 +110,33 @@ const Profile = () => {
         }
     }
 
+    const handleCancelAccount = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:5001/api/users/destroy', {
+                method: "DELETE",
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const data = await response.json();
+            console.log(data);
+
+            if(!response.ok) {
+                console.log(data.error);
+                toast.error(data.error, toastOptions);
+            } else {
+                toast.success('Account deleted successfully', toastOptions);
+                setTimeout(() => {
+                    auth.logout();
+                }, 2000)
+            }
+        } catch(error) {
+
+        }
+    }
+
     return (
         <React.Fragment>
             <nav className="nav-bar">
@@ -171,7 +198,7 @@ const Profile = () => {
 
                     <div className='sign-up-option'>
                         <p className='or'> Unhappy? </p>
-                        <Link to="/login" className='auth-link' >Cancel my account</Link><br />
+                        <Link to="#" onClick= {handleCancelAccount} className='auth-link' >Cancel my account</Link><br />
                     </div>
                  </form>
                  <ToastContainer>
