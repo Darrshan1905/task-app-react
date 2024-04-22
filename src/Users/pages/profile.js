@@ -28,7 +28,6 @@ const Profile = () => {
                 toast.error(data.message, toastOptions);
             } else {
                 const data = await response.json();
-                console.log(data);
                 setName(data.name);
                 setEmail(data.email);
             }

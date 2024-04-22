@@ -27,7 +27,6 @@ const AllProjects = () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            console.log(data)
             setProjects(data);
         } catch (err) {
             console.error("Error fetching projects:", err);

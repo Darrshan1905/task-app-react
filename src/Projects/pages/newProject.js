@@ -23,7 +23,6 @@ const NewProject = () => {
     }
 
     const handleValidation = () => {
-        console.log(startDate);
         if(title.length < 5) {
             toast.error("Project Title length must be greater than 4 characters", toastOptions);
             return false;
@@ -58,7 +57,6 @@ const NewProject = () => {
                 });
     
                 const data = await response.json();
-                console.log(data.message)
                 
                 if(!response.ok) {
                     console.log(data.error);

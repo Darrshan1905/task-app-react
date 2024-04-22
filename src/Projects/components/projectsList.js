@@ -4,7 +4,6 @@ import { AuthContext } from "../../shared/context/authContext";
 import { ToastContainer, toast } from "react-toastify";
 
 const ProjectsList = ({projects, setIsUpdated, isSearched}) => {
-    console.log(isSearched)
     const auth = useContext(AuthContext);
 
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Kolkata' };
@@ -34,6 +33,11 @@ const ProjectsList = ({projects, setIsUpdated, isSearched}) => {
 
     const handleDeleteProject = async (projectId, projectOwnerId) => {
         if(validUser(projectOwnerId)) {
+            const confirmDelete = window.confirm("Are you sure you want to delete this project?");
+
+            if (!confirmDelete) {
+                return; 
+            }
             try {
                 const response = await fetch(`http://localhost:5001/api/projects/${projectId}`,{
                     method: "DELETE",
@@ -43,7 +47,6 @@ const ProjectsList = ({projects, setIsUpdated, isSearched}) => {
                 })
     
                 const data = await response.json();
-                console.log(data);
     
                 if(!response.ok) {
                     console.log(data.error);

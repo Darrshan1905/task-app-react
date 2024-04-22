@@ -31,7 +31,6 @@ const EditProject = () => {
     const [startDate, setStartDate] = useState(formatDate(startDateStr));
     const [endDate, setEndDate] = useState(formatDate(endDateStr));
 
-    console.log(startDate, endDate)
 
     const handleValidation = () => {
         if(title.length < 5) {
