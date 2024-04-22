@@ -71,6 +71,7 @@ const Profile = () => {
                 toast.error("Password and Confrim password don't match", toastOptions);
                 return false;
             }
+            return true;
         }
         if(confirmPassword !== "") {
             toast.error("Enter password first before confirming it!", toastOptions);
@@ -83,7 +84,6 @@ const Profile = () => {
         event.preventDefault();
 
         if(handleValidation()) {
-
             try {
                 const response = await fetch('http://localhost:5001/api/users/update', {
                     method: "PUT",
@@ -101,7 +101,7 @@ const Profile = () => {
                     console.log(data.error);
                     toast.error(data.error, toastOptions);
                 } else {
-                    auth.login(data.id, data.accessToken);
+                    auth.login(data.id, data.accessToken, data.name);
                     navigate('/projects');
                 }
             } catch (err) {
@@ -151,23 +151,23 @@ const Profile = () => {
                 <h2>Edit Profile</h2>
                 <form onSubmit={editProfileHandler}>
                     <label htmlFor="email">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            value={email} 
-                            onChange={e => setEmail(e.target.value)} 
-    
-                        />
+                    <input 
+                        type="email" 
+                        id="email" 
+                        value={email} 
+                        onChange={e => setEmail(e.target.value)} 
+
+                    />
                     <br/><br/>
 
                     <label htmlFor="name">Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            value={name} 
-                            onChange={e => setName(e.target.value)} 
-                            
-                        />
+                    <input 
+                        type="text" 
+                        id="name" 
+                        value={name} 
+                        onChange={e => setName(e.target.value)} 
+                        
+                    />
                     <br/><br/>
 
                     <label htmlFor="password">Password</label>

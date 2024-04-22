@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../shared/context/authContext";
 import SearchProject from "../components/searchProject";
@@ -9,10 +9,12 @@ const AllProjects = () => {
     const [projects, setProjects] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [isSearched, setIsSearched] = useState(false);
+    const [isUpdated ,setIsUpdated] = useState(false);
 
     const auth = useContext(AuthContext);
+    
 
-    const fetchProjects = async () => {
+    const fetchProjects = useCallback(async () => {
         const token = auth.token;
         
         try {
@@ -31,11 +33,11 @@ const AllProjects = () => {
             console.error("Error fetching projects:", err);
         }
         
-    };
+    },[isUpdated,auth.token]);
 
     useEffect(() => {
         fetchProjects();
-    }, []);
+    }, [fetchProjects]);
 
     const handleSearch = (results) => {
         setSearchResults(results);
@@ -64,12 +66,12 @@ const AllProjects = () => {
                 </div>
             </nav>
             <div className="welcome-msg">
-                <h2 className="welcome-heading">Welcome <span className="welcome-name">guest</span> !</h2>
+                <h2 className="welcome-heading">Welcome <span className="welcome-name">{`${auth.name}`}</span> !</h2>
             </div>
             <SearchProject onSearch={handleSearch} setSearchedToTrue={setIsSearched}/>
             {!isSearched ? (
                 projects.length > 0 ? (
-                    <ProjectsList projects={projects}/>
+                    <ProjectsList projects={projects} setIsUpdated={setIsUpdated}/>
                 ) : (
                     <div className='tasks-container no-task'>
                         <h2>No projects yet!</h2>
@@ -77,7 +79,7 @@ const AllProjects = () => {
                 )
             ) : (
                 searchResults.length > 0 ? (
-                    <ProjectsList projects={searchResults} />
+                    <ProjectsList projects={searchResults} setIsUpdated={setIsUpdated}/>
                 ) : (
                     <div className='tasks-container no-task'>
                         <h2>No projects match the search query!</h2>

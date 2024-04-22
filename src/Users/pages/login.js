@@ -49,8 +49,8 @@ const LogIn = () => {
                 }
     
                 const data = await response.json();
-    
-                auth.login(data.id, data.accessToken);
+                console.log(data);
+                auth.login(data.id, data.accessToken, data.name, data.role === 'admin');
             } catch (err) {
                 
             }
