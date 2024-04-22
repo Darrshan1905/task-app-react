@@ -101,7 +101,7 @@ const Profile = () => {
                     console.log(data.error);
                     toast.error(data.error, toastOptions);
                 } else {
-                    auth.login(data.id, data.accessToken, data.name);
+                    auth.login(data.id, data.accessToken, data.name, auth.isAdmin);
                     navigate('/projects');
                 }
             } catch (err) {

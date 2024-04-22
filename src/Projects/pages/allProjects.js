@@ -71,7 +71,7 @@ const AllProjects = () => {
             <SearchProject onSearch={handleSearch} setSearchedToTrue={setIsSearched}/>
             {!isSearched ? (
                 projects.length > 0 ? (
-                    <ProjectsList projects={projects} setIsUpdated={setIsUpdated}/>
+                    <ProjectsList projects={projects} setIsUpdated={setIsUpdated} isSearched={isSearched}/>
                 ) : (
                     <div className='tasks-container no-task'>
                         <h2>No projects yet!</h2>
@@ -79,7 +79,7 @@ const AllProjects = () => {
                 )
             ) : (
                 searchResults.length > 0 ? (
-                    <ProjectsList projects={searchResults} setIsUpdated={setIsUpdated}/>
+                    <ProjectsList projects={searchResults} setIsUpdated={setIsUpdated} isSearched={isSearched}/>
                 ) : (
                     <div className='tasks-container no-task'>
                         <h2>No projects match the search query!</h2>

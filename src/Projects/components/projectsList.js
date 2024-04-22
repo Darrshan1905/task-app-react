@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../shared/context/authContext";
 import { ToastContainer, toast } from "react-toastify";
 
-const ProjectsList = ({projects, setIsUpdated}) => {
+const ProjectsList = ({projects, setIsUpdated, isSearched}) => {
+    console.log(isSearched)
     const auth = useContext(AuthContext);
-
-    console.log(auth.isAdmin)
 
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Kolkata' };
 
@@ -61,8 +60,7 @@ const ProjectsList = ({projects, setIsUpdated}) => {
 
     return (
         <div className='projects-container'>
-            <h2> List of all projects </h2>
-
+            {!isSearched ? <h2> List of all projects </h2> : <h2> List of projects matching the search query </h2>}
             <table>
                 <tbody>
                 <tr>
@@ -88,7 +86,7 @@ const ProjectsList = ({projects, setIsUpdated}) => {
                              (e) => {
                                 if(project.user_id !== auth.userId && !auth.isAdmin) {
                                     e.preventDefault();
-                                    toast.error('Not authorized to edit this page', toastOptions);
+                                    toast.error('Not authorized to edit this project', toastOptions);
                                 }
                              } 
                             }
