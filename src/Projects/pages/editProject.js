@@ -73,7 +73,7 @@ const EditProject = () => {
                 } else {
                     toast.success("Updated project successfully", toastOptions);
                     setTimeout(() => {
-                        navigate('/projects');
+                        navigate(-1);
                     },2000);
                 }
             } catch(err) {

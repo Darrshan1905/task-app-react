@@ -11,6 +11,9 @@ import AllProjects from './Projects/pages/allProjects';
 import ShowProject from './Projects/pages/showProject';
 import NewProject from './Projects/pages/newProject';
 import EditProject from './Projects/pages/editProject';
+import NewComment from './Comments/Pages/newComment';
+import NewTask from './Tasks/Pages/newTask';
+import EditTask from './Tasks/Pages/editTask';
 
 function App() {
   const {token, login, logout, userId, name, isAdmin} = useAuth();
@@ -25,6 +28,9 @@ function App() {
         <Route path='/projects/:pid' exact element={<ShowProject/>}/>
         <Route path='/projects/:pid/edit' exact element={<EditProject/>}/>
         <Route path='/projects/new' exact element={<NewProject/>}/>
+        <Route path='/projects/:pid/tasks/new' exact element={<NewTask/>}/>
+        <Route path='/projects/:pid/tasks/:tid/edit' exact element={<EditTask/>}/>
+        <Route path='/projects/:pid/tasks/:tid/comments/new' exact element={<NewComment/>}/>
         <Route path='/profile' exact element={<Profile/>}/>
         <Route path = '*' element={<Navigate to ="/" replace/>}/>
       </Routes>

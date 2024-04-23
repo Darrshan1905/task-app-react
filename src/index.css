@@ -67,6 +67,11 @@ a.icon:hover{
     color: #fff;
 }
 
+a.back-link {
+  margin: 10px;
+  display: inline-block;
+}
+
 .nav-bar {
     margin: 10px 0 0 10px;
     display: flex;
@@ -244,5 +249,47 @@ input:focus, .description:focus {
     overflow-y: auto;
   }
 
+  .project-details {
+    margin: 28px 0 15px 10px;
+    color: #fff;
+  }
 
+  .title {
+    font-size: 1.2rem;
+  }
 
+  .name {
+    color: #4db5ff;
+    font-weight: bolder;
+  }
+  
+  .incr {
+    font-size: 1.2rem;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .right-btn {
+    margin-right: 10px;
+  }
+
+  .comment-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .comments-container {
+    margin: 12px 0;
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #4db5ff;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  

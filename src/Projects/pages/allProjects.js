@@ -32,6 +32,7 @@ const AllProjects = () => {
             console.error("Error fetching projects:", err);
         }
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isUpdated,auth.token]);
 
     useEffect(() => {

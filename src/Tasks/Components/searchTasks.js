@@ -1,19 +1,21 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../shared/context/authContext";
 
-const SearchProject = ({onSearch, setSearchedToTrue}) => {
+const SearchTasks = ({projectId, onSearch, setSearchedToTrue}) => {
+
     const [searchQuery, setSearchQuery] = useState("");
 
     const auth = useContext(AuthContext);
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
+    const token = auth.token;
+
+    const searchHandler = async (event) => {
+        event.preventDefault();
+
         console.log(searchQuery);
 
-        const token = auth.token;
-
         let searchResults;
-        await fetch(`http://localhost:5001/api/projects/search?key=${searchQuery}`, {
+        await fetch(`http://localhost:5001/api/projects/${projectId}/tasks/search?key=${searchQuery}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -29,15 +31,14 @@ const SearchProject = ({onSearch, setSearchedToTrue}) => {
             console.log(err);
         })
     }
-    
     return (
-        <form role="search" onSubmit={submitHandler}>
+        <form role="search" onSubmit={searchHandler}>
             <div className="search">
                 <input 
                     className="input-control" 
                     type="search" 
                     name="key" 
-                    placeholder="Search for a project" 
+                    placeholder="Search for a task" 
                     onChange={(e) => setSearchQuery(e.target.value)} 
                     style={{paddingRight: '40px'}}
                 />
@@ -51,4 +52,4 @@ const SearchProject = ({onSearch, setSearchedToTrue}) => {
     )
 }
 
-export default SearchProject;
+export default SearchTasks;
